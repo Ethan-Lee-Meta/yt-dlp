@@ -1,0 +1,26 @@
+name: YouTube GUI offline checks
+
+on:
+  push:
+    paths:
+      - "tools/youtube_downloader/**"
+      - "test/test_youtube_downloader_gui.py"
+      - ".github/workflows/youtube-gui.yml"
+  pull_request:
+    paths:
+      - "tools/youtube_downloader/**"
+      - "test/test_youtube_downloader_gui.py"
+      - ".github/workflows/youtube-gui.yml"
+
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Syntax checks
+        run: python -m py_compile tools/youtube_downloader/backend.py tools/youtube_downloader/app.py test/test_youtube_downloader_gui.py
+      - name: Offline unit tests
+        run: python -m unittest test.test_youtube_downloader_gui -v
