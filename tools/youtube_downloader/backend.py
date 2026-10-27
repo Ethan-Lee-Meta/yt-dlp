@@ -130,7 +130,7 @@ def build_command(
         "channel": "%(channel,uploader)s/%(upload_date)s - %(title).150B [%(id)s].%(ext)s",
     }
     args = list(engine) + [
-        "--ignore-config", "--no-color", "--newline",
+        "--ignore-config", "--no-color", "--newline", "--progress",
         "--continue", "--no-overwrites",
         "--retries", "10", "--fragment-retries", "10",
         "--socket-timeout", "30",
